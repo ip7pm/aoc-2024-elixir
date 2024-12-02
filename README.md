@@ -2,7 +2,7 @@
 
 Run the solution:
 
-```elixir
+```sh
 elixir day01.ex
 ```
 

@@ -13,9 +13,7 @@ defmodule Day02 do
         true
       else
         0..length(row)-1
-        |> Enum.map(fn idx ->
-          safe? List.delete_at(row, idx)
-        end)
+        |> Enum.map(&(safe? List.delete_at(row, &1)))
         |> Enum.any?
       end
     end)

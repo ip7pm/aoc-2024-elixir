@@ -2,9 +2,7 @@ defmodule Day01 do
 
   def part1(input) do
     {left, right} = parse input
-    left_sorted = Enum.sort left
-    right_sorted = Enum.sort right
-    Enum.zip(left_sorted, right_sorted)
+    Enum.zip(Enum.sort(left), Enum.sort(right))
     |> Enum.reduce(0, fn {a, b}, acc -> acc + abs(a - b) end)
   end
 

@@ -2,13 +2,13 @@ defmodule Day02 do
 
   def part1(input) do
     parse(input)
-    |> Enum.map(&safe?(&1))
-    |> Enum.count(&(&1))
+    |> Enum.filter(&safe?(&1))
+    |> Enum.count()
   end
 
   def part2(input) do
     parse(input)
-    |> Enum.map(fn row ->
+    |> Enum.filter(fn row ->
       if safe? row do
         true
       else
@@ -17,7 +17,7 @@ defmodule Day02 do
         |> Enum.any?
       end
     end)
-    |> Enum.count(&(&1))
+    |> Enum.count()
   end
 
   defp parse(input) do

@@ -1,29 +1,26 @@
+Code.require_file "./matrix.ex"
+
 defmodule Day01 do
 
   def part1(input) do
-    {left, right} = parse input
+    [left, right] = parse input
     Enum.zip(Enum.sort(left), Enum.sort(right))
     |> Enum.reduce(0, fn {a, b}, acc -> acc + abs(a - b) end)
   end
 
   def part2(input) do
-    {left, right} = parse input
+    [left, right] = parse input
     Enum.reduce(left, 0, fn i, acc ->
       acc + (i * Enum.count(right, &(&1 == i)))
     end)
   end
 
-  defp parse(input) do
-    {left, right} =
-      input
-      |> String.split("\n", trim: true)
-      |> Enum.map(&String.split(&1, " ", trim: true))
-      |> Enum.map(fn [a, b] -> {a, b} end)
-      |> Enum.unzip()
-    {Enum.map(left, &String.to_integer(&1)), Enum.map(right, &String.to_integer(&1))}
+  def parse(input) do
+    Matrix.parse(input, fn s -> String.to_integer(s) end, " ") |> Matrix.transpose()
   end
 end
 
+# -----
 
 input_test = """
 3   4

@@ -1,3 +1,5 @@
+Code.require_file "./matrix.ex"
+
 defmodule Day02 do
 
   def part1(input) do
@@ -21,12 +23,7 @@ defmodule Day02 do
   end
 
   defp parse(input) do
-    input
-    |> String.split("\n", trim: true)
-    |> Enum.map(fn r ->
-      String.split(r, " ", trim: true)
-      |> Enum.map(&String.to_integer(&1))
-    end)
+    Matrix.parse(input, fn s -> String.to_integer(s) end, " ")
   end
 
   defp safe?(row) do
@@ -40,6 +37,7 @@ defmodule Day02 do
   end
 end
 
+# -----
 
 input_test = """
 7 6 4 2 1

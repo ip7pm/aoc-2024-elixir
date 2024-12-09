@@ -27,6 +27,8 @@ defmodule Matrix do
     {length(mat), List.first(mat) |> length()}
   end
 
+  def at(mat, {row, col}), do: at(mat, row, col)
+
   def at(mat, row, col) do
     {rows, cols} = size mat
     if row >= 0 and row < rows and col >= 0 and col < cols do
@@ -35,6 +37,18 @@ defmodule Matrix do
       nil
     end
   end
+
+
+  def set(mat, {row, col}, value), do: set(mat, row, col, value)
+
+  def set(mat, row, col, value) do
+    vect = Enum.at mat, row
+    new_vect = List.replace_at vect, col, value
+    List.replace_at mat, row, new_vect
+  end
+
+
+
 
   def transpose(mat) do
     mat |> List.zip |> Enum.map(&Tuple.to_list/1)

@@ -21,7 +21,7 @@ defmodule Day04 do
     |> Enum.map(fn {row, col} ->
       pattern =
         deltas
-        |> Enum.map(fn {dr, dc} -> Matrix.at(mat, row + dr, col + dc) end)
+        |> Enum.map(fn {dr, dc} -> Matrix.get(mat, row + dr, col + dc) end)
         |> Enum.join("")
       Enum.any? ["MSMS", "SMSM", "MMSS", "SSMM"], fn s -> pattern == s end
     end)

@@ -27,9 +27,9 @@ defmodule Matrix do
     {length(mat), List.first(mat) |> length()}
   end
 
-  def at(mat, {row, col}), do: at(mat, row, col)
+  def get(mat, {row, col}), do: get(mat, row, col)
 
-  def at(mat, row, col) do
+  def get(mat, row, col) do
     {rows, cols} = size mat
     if row >= 0 and row < rows and col >= 0 and col < cols do
       Enum.at(mat, row) |> Enum.at(col)
@@ -37,7 +37,6 @@ defmodule Matrix do
       nil
     end
   end
-
 
   def set(mat, {row, col}, value), do: set(mat, row, col, value)
 
@@ -47,8 +46,7 @@ defmodule Matrix do
     List.replace_at mat, row, new_vect
   end
 
-
-
+  # -----
 
   def transpose(mat) do
     mat |> List.zip |> Enum.map(&Tuple.to_list/1)
@@ -67,7 +65,7 @@ defmodule Matrix do
 
   def vect_by_step(mat, row, col, {dr, dc}, range) do
     range
-    |> Enum.map(fn i -> at(mat, row + i * dr, col + i * dc) end)
+    |> Enum.map(fn i -> get(mat, row + i * dr, col + i * dc) end)
     |> Enum.filter(&(&1 != nil))
   end
 end

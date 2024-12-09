@@ -34,7 +34,7 @@ defmodule Day06 do
   defp move(state) do
     [map, pos, step] = state
     next_pos = next_pos pos, step
-    char = Matrix.at map, next_pos
+    char = Matrix.get map, next_pos
     case char do
       nil -> state
       "#" ->
@@ -48,7 +48,7 @@ defmodule Day06 do
   defp loop?(state) do
     [map, pos, step, path] = state
     next_pos = next_pos pos, step
-    char = Matrix.at map, next_pos
+    char = Matrix.get map, next_pos
     if MapSet.member? path, {next_pos, step} do
       true
     else

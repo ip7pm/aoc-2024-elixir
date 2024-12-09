@@ -23,7 +23,7 @@ defmodule Day02 do
   end
 
   defp parse(input) do
-    Matrix.parse(input, fn s -> String.to_integer(s) end, " ")
+    Matrix.parse(input, sep: " ", to: :int)
   end
 
   defp safe?(row) do

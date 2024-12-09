@@ -1,21 +1,27 @@
 defmodule Matrix do
 
-  def parse(input, delim \\ "") do
-    parse(input, fn elm -> elm end, delim)
+  def parse(input, opts \\ []) do
+    defaults = [sep: "", to: :none]
+    opts = Keyword.merge(defaults, opts) |> Enum.into(%{})
+    parse input, opts.sep, opts.to
   end
 
-  # def parse(input, :int, delim \\ "") when is_binary(delim) do
-  #   parse(input, fn elm -> String.to_ingeter(elm) end, delim)
-  # end
+  def parse(input, sep, :none), do: parse(input, sep, &(&1))
 
-  def parse(input, fun, delim) do
+  def parse(input, sep, :int), do: parse(input, sep, &(String.to_integer(&1)))
+
+  def parse(input, sep, :float), do: parse(input, sep, &(String.to_float(&1)))
+
+  def parse(input, sep, fun) when is_function(fun) do
     input
     |> String.split("\n", trim: true)
     |> Enum.map(fn r ->
-      String.split(r, delim, trim: true)
+      String.split(r, sep, trim: true)
       |> Enum.map(&fun.(&1))
     end)
   end
+
+  # -----
 
   def size(mat) do
     {length(mat), List.first(mat) |> length()}

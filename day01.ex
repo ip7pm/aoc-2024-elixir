@@ -16,7 +16,7 @@ defmodule Day01 do
   end
 
   def parse(input) do
-    Matrix.parse(input, fn s -> String.to_integer(s) end, " ") |> Matrix.transpose()
+    Matrix.parse(input, sep: " ", to: :int) |> Matrix.transpose()
   end
 end
 
